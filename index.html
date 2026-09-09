@@ -2240,13 +2240,29 @@ html[dir="rtl"] .quote:after{left:auto!important;right:-1px}
 html{overflow-x:clip}
 @media(max-width:600px){.card-copy strong,.card-copy small{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;overflow-wrap:anywhere;line-height:1.5}.link-card{height:auto!important}.card-copy{min-width:0}}
 </style>
+
+<style id="edge-mist-preview">
+.edge-mist{display:none;position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0;contain:strict}
+.edge-mist-stream{position:absolute;bottom:-150px;width:clamp(170px,23vw,360px);height:650px;mask-image:linear-gradient(to top,#000 0%,#000 35%,transparent 90%)}
+.edge-mist-stream.left{left:-95px}.edge-mist-stream.right{right:-95px;transform:scaleX(-1)}
+.edge-mist-stream i{position:absolute;left:-20px;bottom:-80px;width:100%;height:350px;border-radius:45% 60% 38% 65%;background:radial-gradient(ellipse at 35% 65%,rgba(255,157,0,.22),rgba(218,100,17,.10) 36%,transparent 68%);filter:blur(28px);opacity:0;animation:edgeMistRise 17s linear infinite;will-change:transform,opacity}
+.edge-mist-stream i:nth-child(2){animation-delay:-5.7s;left:12%;width:85%;height:290px}
+.edge-mist-stream i:nth-child(3){animation-delay:-11.3s;left:-10%;height:390px}
+.edge-mist-stream.right i{animation-delay:-8s}.edge-mist-stream.right i:nth-child(2){animation-delay:-13.7s}.edge-mist-stream.right i:nth-child(3){animation-delay:-2.3s}
+@keyframes edgeMistRise{0%{transform:translate3d(-15px,30px,0) scale(.72) rotate(-14deg);opacity:0}18%{opacity:.72}55%{opacity:.48}100%{transform:translate3d(60px,-470px,0) scale(1.35) rotate(20deg);opacity:0}}
+.ambient-lights{opacity:.55!important}
+@media(max-width:600px){.edge-mist-stream{width:200px;height:480px;bottom:-140px}.edge-mist-stream.left{left:-120px}.edge-mist-stream.right{right:-120px}.edge-mist-stream i{filter:blur(24px);animation-duration:20s}}
+@media(prefers-reduced-motion:reduce){.edge-mist-stream i{animation:none;opacity:.22;transform:translateY(-80px)}.edge-mist-stream i:not(:first-child){display:none}}
+</style>
+<style id="intro-brand-logo-style">.intro-brand-logo{display:block;width:auto;height:clamp(110px,24vh,210px);max-width:55vw;object-fit:contain}</style>
 </head>
 <body>
+<div class="edge-mist" aria-hidden="true"><div class="edge-mist-stream left"><i></i><i></i><i></i></div><div class="edge-mist-stream right"><i></i><i></i><i></i></div></div>
 <div class="hub-brand-backdrop" aria-hidden="true"><div class="hub-brand-light"></div><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MCIgaGVpZ2h0PSIxNzkiIHZpZXdCb3g9IjUgOCA5MCAxNzkiIGZpbGw9Im5vbmUiPgogIDx0aXRsZT5BYmQgQWwgSGFkZSDigJQgTWFzdGVyIExvZ28gMDQ8L3RpdGxlPgogIDxkZXNjPlZlY3RvciByZWNvbnN0cnVjdGlvbiBmcm9tIHRoZSBhcHByb3ZlZCBzb3VyY2UtZGVyaXZlZCByYXN0ZXIuIEdlb21ldHJ5IHByZXNlcnZlZCBhcyB0d28gY2xvc2VkIHBhdGhzLjwvZGVzYz4KICA8cGF0aCBmaWxsPSIjRkY5RDAwIiBkPSJNMzQgOEgzNlYzNEwyNCA0NlY5MUwzMCA5N0wzMiA5N0wzNCAxMDBMMzcgMTAwTDM5IDk3TDQxIDk3TDQzIDk0TDQ1IDk0TDQ3IDkxTDQ5IDkxTDU2IDk4TDU4IDk4TDU5IDEwMEw2MSAxMDBMNjYgMTA1TDY4IDEwNUw2OSAxMDdMNzEgMTA3TDczIDExMEw3NiAxMTFMNzcgMTEwVjkySDc4VjU2TDgwIDU1TDgxIDUxTDg1IDQ3VjQ0SDg3VjQ4TDk1IDU2Vjc2SDk0TDk1IDc3VjE2NUw4NiAxNzNWMTc1TDc4IDE4M0g3N1YxMzRMNzQgMTMzTDczIDEzMUg3MUw3MCAxMjlINjhMNjYgMTI2TDYyIDEyNUw2MCAxMjJINThWMTIwTDUzIDExNUw0NCAxMTNMMzYgMTA1VjEwM0gzM0wyNCAxMTJWMTI4TDEyIDEzOUwxMSAxNDJIOUw4IDE0NUw1IDE0NlY0NEg2VjM3WiIvPgogIDxwYXRoIGZpbGw9IiNGRjlEMDAiIGQ9Ik01NiAxMjVMNTggMTI4TDU3IDE2OEw0OSAxNzVWMTc3TDM5IDE4N1YxNDNMNDUgMTM4VjEzNloiLz4KPC9zdmc+Cg==" alt=""/></div>
 <div aria-hidden="true" class="motion-intro" id="motionIntro">
 <div class="intro-vignette"></div>
 <div class="intro-ribbons" id="introRibbons"></div>
-<div class="intro-mark"><span class="intro-a">A</span><span class="intro-h">H</span></div>
+<div class="intro-mark"><img class="intro-brand-logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MCIgaGVpZ2h0PSIxNzkiIHZpZXdCb3g9IjUgOCA5MCAxNzkiIGZpbGw9Im5vbmUiPgogIDx0aXRsZT5BYmQgQWwgSGFkZSDigJQgTWFzdGVyIExvZ28gMDQ8L3RpdGxlPgogIDxkZXNjPlZlY3RvciByZWNvbnN0cnVjdGlvbiBmcm9tIHRoZSBhcHByb3ZlZCBzb3VyY2UtZGVyaXZlZCByYXN0ZXIuIEdlb21ldHJ5IHByZXNlcnZlZCBhcyB0d28gY2xvc2VkIHBhdGhzLjwvZGVzYz4KICA8cGF0aCBmaWxsPSIjRkY5RDAwIiBkPSJNMzQgOEgzNlYzNEwyNCA0NlY5MUwzMCA5N0wzMiA5N0wzNCAxMDBMMzcgMTAwTDM5IDk3TDQxIDk3TDQzIDk0TDQ1IDk0TDQ3IDkxTDQ5IDkxTDU2IDk4TDU4IDk4TDU5IDEwMEw2MSAxMDBMNjYgMTA1TDY4IDEwNUw2OSAxMDdMNzEgMTA3TDczIDExMEw3NiAxMTFMNzcgMTEwVjkySDc4VjU2TDgwIDU1TDgxIDUxTDg1IDQ3VjQ0SDg3VjQ4TDk1IDU2Vjc2SDk0TDk1IDc3VjE2NUw4NiAxNzNWMTc1TDc4IDE4M0g3N1YxMzRMNzQgMTMzTDczIDEzMUg3MUw3MCAxMjlINjhMNjYgMTI2TDYyIDEyNUw2MCAxMjJINThWMTIwTDUzIDExNUw0NCAxMTNMMzYgMTA1VjEwM0gzM0wyNCAxMTJWMTI4TDEyIDEzOUwxMSAxNDJIOUw4IDE0NUw1IDE0NlY0NEg2VjM3WiIvPgogIDxwYXRoIGZpbGw9IiNGRjlEMDAiIGQ9Ik01NiAxMjVMNTggMTI4TDU3IDE2OEw0OSAxNzVWMTc3TDM5IDE4N1YxNDNMNDUgMTM4VjEzNloiLz4KPC9zdmc+Cg==" alt=""/></div>
 <div class="intro-caption">DESIGN · BUILD · EXPERIENCE</div>
 <button class="intro-skip" id="introSkip" type="button">SKIP</button>
 </div><div aria-hidden="true" class="global-ribbons">
@@ -2692,4 +2708,17 @@ shareBtn.addEventListener('click',async()=>{try{if(navigator.share)await navigat
   stage.addEventListener('pointerleave', resetMotion);
 })();
 </script>
-</body></html>
+<style>#dryIceSmoke{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}</style>
+<canvas id="dryIceSmoke" aria-hidden="true"></canvas>
+<script>
+(()=>{const c=document.getElementById('dryIceSmoke'),g=c.getContext('webgl',{alpha:true,premultipliedAlpha:false,antialias:false});if(!g)return;
+const vert=`attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}`;
+const frag=`precision mediump float;uniform vec2 r;uniform float t;
+float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y);}
+float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*noise(p);p=mat2(.8,-.6,.6,.8)*p*2.03+3.7;a*=.5;}return v;}
+void main(){vec2 uv=gl_FragCoord.xy/r;float side=min(uv.x,1.-uv.x);float y=uv.y;vec2 p=vec2(uv.x*r.x/r.y,y)*6.;float time=t*.075;vec2 drift=vec2(time*.5,-time);vec2 q=vec2(fbm(p+drift),fbm(p+vec2(5.2,1.3)+drift));vec2 w=vec2(fbm(p+3.8*q+vec2(time*.24,1.7)),fbm(p+3.2*q+vec2(8.3,-time*.6)));float n=fbm(p+4.4*w+drift);float curls=fbm(p*2.+w*5.+drift);float edge=exp(-side*8.);float floorMist=exp(-y*8.);float reach=exp(-y*3.8)*edge;float envelope=max(reach,floorMist*.22);float density=smoothstep(.25,.73,n)*envelope;float filaments=smoothstep(.36,.66,curls)*density;float a=clamp(density*.86+filaments*.22,0.,.7);a*=(1.-smoothstep(.48,.88,y));vec3 smoke=mix(vec3(.23,.22,.21),vec3(.66,.62,.54),smoothstep(.32,.75,n));float amber=exp(-side*13.)*exp(-y*3.);smoke=mix(smoke,vec3(.85,.39,.075),amber*.6);gl_FragColor=vec4(smoke,a);}`;
+function shader(type,source){const sh=g.createShader(type);g.shaderSource(sh,source);g.compileShader(sh);if(!g.getShaderParameter(sh,g.COMPILE_STATUS))throw Error(g.getShaderInfoLog(sh));return sh;}
+const pr=g.createProgram();g.attachShader(pr,shader(g.VERTEX_SHADER,vert));g.attachShader(pr,shader(g.FRAGMENT_SHADER,frag));g.linkProgram(pr);g.useProgram(pr);const buf=g.createBuffer();g.bindBuffer(g.ARRAY_BUFFER,buf);g.bufferData(g.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),g.STATIC_DRAW);const loc=g.getAttribLocation(pr,'p');g.enableVertexAttribArray(loc);g.vertexAttribPointer(loc,2,g.FLOAT,false,0,0);const res=g.getUniformLocation(pr,'r'),time=g.getUniformLocation(pr,'t');function resize(){const scale=Math.min(1,900/innerWidth);c.width=Math.round(innerWidth*scale);c.height=Math.round(innerHeight*scale);g.viewport(0,0,c.width,c.height);g.uniform2f(res,c.width,c.height);}resize();addEventListener('resize',resize);const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;let prev=0;function frame(ms){if(ms-prev>40){g.uniform1f(time,reduce?20:ms/1000);g.drawArrays(g.TRIANGLES,0,6);prev=ms;}if(!reduce)requestAnimationFrame(frame);}requestAnimationFrame(frame);
+})();
+</script></body></html>
