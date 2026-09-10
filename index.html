@@ -2275,7 +2275,7 @@ html{overflow-x:clip}
 .hub-brand-backdrop .background-neon-logo{opacity:.55;filter:drop-shadow(0 0 2px #ffd08dcc) drop-shadow(0 0 8px #ff9d0080) drop-shadow(0 0 23px #ff9d0040);animation:cinemaNeon 11s linear infinite}
 .background-neon-logo path{stroke:#ffc16b;stroke-width:.8;fill:#ff9d0010}
 @keyframes cinemaNeon{0%,58%,61%,64%,100%{opacity:.55}58.2%,58.8%{opacity:.16}58.5%,59.2%{opacity:.72}60%{opacity:.3}62.2%{opacity:.2}62.6%{opacity:.65}}
-#softDryIce{opacity:.8;filter:blur(3px);mask-image:linear-gradient(to top,#000 0%,#000 16%,transparent 52%)}
+#softDryIce{opacity:.85;filter:blur(.6px);mask-image:linear-gradient(to top,#000 0%,#000 22%,transparent 62%)}
 @media(max-width:650px){#softDryIce{opacity:.65}.hub-brand-backdrop .background-neon-logo{animation-name:cinemaNeonMobile}}
 @keyframes cinemaNeonMobile{0%,58%,61%,100%{opacity:.34}58.3%,59%{opacity:.12}58.6%,59.4%{opacity:.48}}
 @media(prefers-reduced-motion:reduce){.hub-brand-backdrop .background-neon-logo,.logo-piece{animation:none}}
@@ -2728,11 +2728,12 @@ shareBtn.addEventListener('click',async()=>{try{if(navigator.share)await navigat
 </script>
 <canvas id="softDryIce" aria-hidden="true"></canvas><script>
 (()=>{const c=document.getElementById('softDryIce'),ctx=c.getContext('2d');if(!ctx)return;
-const tex=document.createElement('canvas');tex.width=tex.height=128;const tc=tex.getContext('2d'),im=tc.createImageData(128,128);
+const textures=[];
 const hash=(x,y)=>{let n=Math.sin(x*127.1+y*311.7)*43758.5453;return n-Math.floor(n)};
 function noise(x,y){const a=Math.floor(x),b=Math.floor(y);let u=x-a,v=y-b;u=u*u*(3-2*u);v=v*v*(3-2*v);return (hash(a,b)*(1-u)+hash(a+1,b)*u)*(1-v)+(hash(a,b+1)*(1-u)+hash(a+1,b+1)*u)*v}
-for(let y=0;y<128;y++)for(let x=0;x<128;x++){let n=0,amp=.5,f=4;for(let k=0;k<4;k++){n+=amp*noise(x/128*f,y/128*f);f*=2;amp*=.5}const dx=(x-64)/64,dy=(y-64)/64,fall=Math.max(0,1-dx*dx-dy*dy),i=(y*128+x)*4;im.data[i]=195;im.data[i+1]=179;im.data[i+2]=155;im.data[i+3]=Math.round(255*Math.pow(fall,2)*n*.72)}tc.putImageData(im,0,0);
-let w,h,last=0;function size(){w=innerWidth;h=innerHeight;c.width=Math.round(w*.7);c.height=Math.round(h*.7);ctx.setTransform(.7,0,0,.7,0,0)}size();addEventListener('resize',size);
+function fbm(x,y){let n=0,a=.55;for(let k=0;k<4;k++){n+=a*noise(x,y);const tx=x;x=1.65*x-1.1*y+6;y=1.1*tx+1.65*y+3;a*=.5}return n}
+for(let seed=0;seed<3;seed++){const tex=document.createElement('canvas');tex.width=tex.height=256;const tc=tex.getContext('2d'),im=tc.createImageData(256,256);for(let y=0;y<256;y++)for(let x=0;x<256;x++){const u=x/256,v=y/256,dx=(u-.5)*2,dy=(v-.5)*2,fall=Math.pow(Math.max(0,1-dx*dx-dy*dy),1.6);const px=u*4+seed*9,py=v*4;const q=fbm(px,py),q2=fbm(px+5,py+3);const n=fbm(px+q*4,py+q2*4);const ridge=Math.pow(Math.max(0,1-Math.abs(n-.51)*7),3);const density=Math.min(1,ridge*.75+Math.pow(n,3)*.6);const i=(y*256+x)*4;im.data[i]=185+ridge*35;im.data[i+1]=169+ridge*36;im.data[i+2]=146+ridge*40;im.data[i+3]=Math.round(255*fall*density*.8)}tc.putImageData(im,0,0);textures.push(tex)}
+let w,h,last=0;function size(){w=innerWidth;h=innerHeight;const scale=Math.min(devicePixelRatio||1,1.25);c.width=Math.round(w*scale);c.height=Math.round(h*scale);ctx.setTransform(scale,0,0,scale,0,0)}size();addEventListener('resize',size);
 const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
-function draw(ms){if(ms-last>50||reduced){last=ms;ctx.clearRect(0,0,w,h);const time=reduced?8:ms/1000;for(let side=0;side<2;side++)for(let i=0;i<12;i++){const age=((time*.032+i/12+side*.37)%1),life=Math.sin(age*Math.PI),sz=Math.min(w*.65,410)*(1+age*.6),x=(side?w:0)+(side?-1:1)*(Math.sin(age*5+i)*25+age*40)-sz/2,y=h+sz*.25-age*Math.min(h*.42,310)-sz/2;ctx.globalAlpha=life*.52;ctx.save();ctx.translate(x+sz/2,y+sz/2);ctx.rotate(Math.sin(time*.06+i)*.35);ctx.drawImage(tex,-sz/2,-sz/2,sz,sz*.72);ctx.restore()}ctx.globalAlpha=1}if(!reduced)requestAnimationFrame(draw)}requestAnimationFrame(draw);
+function draw(ms){if(ms-last>40||reduced){last=ms;ctx.clearRect(0,0,w,h);const time=reduced?8:ms/1000;for(let side=0;side<2;side++)for(let i=0;i<8;i++){const age=((time*.038+i/8+side*.37)%1),life=Math.pow(Math.sin(age*Math.PI),.8),sz=Math.min(w*.55,310)*(1+age*.6),travel=Math.min(h*.5,400),x=(side?w:0)+(side?-1:1)*(25+age*55+Math.sin(age*7+i)*35),y=h+40-age*travel;ctx.globalAlpha=life*.57;ctx.save();ctx.translate(x,y);ctx.rotate((side?-1:1)*(age*.7+Math.sin(time*.12+i)*.25));ctx.drawImage(textures[i%3],-sz/2,-sz*.5,sz,sz);ctx.restore()}ctx.globalAlpha=1}if(!reduced)requestAnimationFrame(draw)}requestAnimationFrame(draw);
 })();</script></body></html>
